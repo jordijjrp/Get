@@ -10,8 +10,9 @@ class Usuarios {
         try {
             $sql = "SELECT * FROM usuarios";
             $resultado = $this->conexion->query($sql);
-            
-            if ($resultado->num_rows > 0) {
+            $filas = $resultado->fetch_all(MYSQLI_ASSOC);
+
+            if (count($filas) > 0) {
                 echo "<table border='1'>
                         <tr>
                             <th>ID</th>
@@ -20,7 +21,7 @@ class Usuarios {
                             <th>Contraseña</th>
                         </tr>";
                 
-                while ($fila = $resultado->fetch_assoc()) {
+                foreach ($filas as $fila) {
                     echo "<tr>
                             <td>{$fila['id']}</td>
                             <td>{$fila['usuario']}</td>
